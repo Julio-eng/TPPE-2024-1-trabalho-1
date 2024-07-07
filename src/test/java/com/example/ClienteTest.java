@@ -43,10 +43,10 @@ public class ClienteTest {
         Object[][] resposta = new Object[][] {
             {"padrao", "SP", true, "padrao", "SP", true, 0.0, 0.0, false, 0.0},
             {"padrao", "SP", false, "padrao", "SP", false, 0.0, 0.0, false, 0.0},
-            {"especial", "BA", true, "especial", "BA", true, 10.0, 30.0, true, 0.0},
-            {"especial", "BA", false, "especial", "BA", false, 10.0, 30.0, false, 0.0},
-            {"prime", "MG", true, "prime", "MG", true, 0.0, 100.0, true, 0.5},
-            {"prime", "MG", false, "prime", "MG", false, 0.0, 100.0, false, 0.3}
+            {"especial", "BA", true, "especial", "BA", true, 0.1, 0.3, true, 0.0},
+            {"especial", "BA", false, "especial", "BA", false, 0.1, 0.3, false, 0.0},
+            {"prime", "MG", true, "prime", "MG", true, 0.0, 0.0, true, 0.05},
+            {"prime", "MG", false, "prime", "MG", false, 0.0, 0.0, false, 0.03}
         };
         return Arrays.asList(resposta);
     }
