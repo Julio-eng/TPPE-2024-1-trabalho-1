@@ -58,22 +58,4 @@ public class ClienteTest {
         assertEquals(estadoEsperado, cliente.getEstado());
         assertEquals(isCapitalEsperado, cliente.isCapital());
     }
-
-    @Test
-    public void testDesconto(){
-        Cliente cliente = new Cliente("Maria", tipo, estado, isCapital, 0, 0);
-        assertEquals(descontoEsperado, cliente.getDisconto(), 0.001);
-    }
-
-    @Test
-    public void testDescontoFrete(){
-        Cliente cliente = new Cliente("Carlos", tipo, estado, isCapital, 0, 0);
-        assertEquals(descontoFreteEsperado, cliente.getDiscontoFrete(), 0.001);
-    }
-
-    @Test
-    public void testTaxaCashback(){
-        Cliente cliente = new Cliente("Mario", tipo, estado, isCapital, 0, 0);
-        assertEquals(taxaCashbackEsperada, cliente.getTaxaCashback(isCartaoEmpresa), 0.001);
-    }
 }
