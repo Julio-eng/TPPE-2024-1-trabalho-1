@@ -8,12 +8,14 @@ public class Venda {
     private Cliente cliente;
     private List<Produto> produtos;
     private String formaPagamento;
+    private ProcessarCashback processadorCashback;
     
     public Venda(Date dataVenda, Cliente cliente, List<Produto> produtos, String formaPagamento) {
         this.dataVenda = dataVenda;
         this.cliente = cliente;
         this.produtos = produtos;
         this.formaPagamento = formaPagamento;
+        this.processadorCashback = new ProcessarCashback(cliente);
     }
 
     public Date getDataVenda() {
@@ -129,17 +131,7 @@ public class Venda {
     }
 
     public double aplicarCashback(double valorCompra) {
-        if (cliente.getTipo().equals("prime")) {
-            double cashback = cliente.getCashback();
-            if (cashback > valorCompra) {
-                cliente.setCashback(cashback - valorCompra);
-                return 0.0;
-            } else {
-                cliente.setCashback(0);
-                return valorCompra - cashback;
-            }
-        }
-        return valorCompra;
+        return processadorCashback.aplicarCashback(valorCompra);
     }
 
     public double valorTotal() {
