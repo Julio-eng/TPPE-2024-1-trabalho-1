@@ -72,39 +72,40 @@ public class Venda {
         return totalICMS + totalMunicipal;
     }
 
-    public double calcularFrete(){
-        if(cliente.getTipo().equals("prime")) return 0.0;
-
-        double valorFrete = 0.0;
-        String estado = cliente.getEstado();
-
-        if(estado.equals("DF")){
-            valorFrete = 5.0;
-        } else if(estado.equals("C0") && cliente.isCapital()){
-            valorFrete = 10.0;
-        } else if(estado.equals("C0") && !cliente.isCapital()){
-            valorFrete = 13.0;
-        } else if(estado.equals("NE") && cliente.isCapital()){
-            valorFrete = 15.0;
-        } else if(estado.equals("NE") && !cliente.isCapital()){
-            valorFrete = 18.0;
-        } else if(estado.equals("N") && cliente.isCapital()){
-            valorFrete = 15.0;
-        } else if(estado.equals("N") && !cliente.isCapital()){
-            valorFrete = 18.0;
-        } else if(estado.equals("SE") && cliente.isCapital()){
-            valorFrete = 7.0;
-        } else if(estado.equals("SE") && !cliente.isCapital()){
-            valorFrete = 10.0;
-        } else if(estado.equals("S") && cliente.isCapital()){
-            valorFrete = 10.0;
-        } else if(estado.equals("S") && !cliente.isCapital()){
-            valorFrete = 13.0;
-        }
-
+    public double calcularFrete() {
+        if (cliente.getTipo().equals("prime")) return 0.0;
+    
+        double valorFrete = calcularValorFrete(cliente.getEstado(), cliente.isCapital());
         valorFrete -= (valorFrete * cliente.getDiscontoFrete());
-
+    
         return valorFrete;
+    }
+    
+    /*
+     * Antes, o método calcularFrete() estava muito grande porque a lógica que definia o valor do frete, baseada no estado do cliente e se era capital ou não, estava dentro de calcularFrete(). 
+     * Com a refatoração 'Extrair Método', foi possível retirar essa lógica de calcularFrete() e criar um método específico para essa lógica, calcularValorFrete(), que será chamado dentro de calcularFrete().
+     * Benefícios:
+     * Código mais legível
+     * Facilita a manutenção do código
+     * Isolamento de partes independentes do código
+     * Diminuição da duplicação, caso o método calcularValorFrete() possa ser utilizado em outros lugares
+    */
+    private double calcularValorFrete(String estado, boolean isCapital) {
+        switch (estado) {
+            case "DF":
+                return 5.0;
+            case "C0":
+                return isCapital ? 10.0 : 13.0;
+            case "NE":
+            case "N":
+                return isCapital ? 15.0 : 18.0;
+            case "SE":
+                return isCapital ? 7.0 : 10.0;
+            case "S":
+                return isCapital ? 10.0 : 13.0;
+            default:
+                return 0.0;
+        }
     }
 
     public double calcularDesconto(){
