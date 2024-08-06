@@ -19,10 +19,6 @@ public class ClienteTest {
     private String tipoEsperado;
     private String estadoEsperado;
     private boolean isCapitalEsperado;
-    private double descontoEsperado;
-    private double descontoFreteEsperado;
-    private boolean isCartaoEmpresa;
-    private double taxaCashbackEsperada;
 
     public ClienteTest(String tipo, String estado, boolean isCapital, String tipoEsperado, String estadoEsperado,
             boolean isCapitalEsperado, double descontoEsperado, double descontoFreteEsperado, boolean isCartaoEmpresa, double taxaCashbackEsperada) {
@@ -32,10 +28,6 @@ public class ClienteTest {
         this.tipoEsperado = tipoEsperado;
         this.estadoEsperado = estadoEsperado;
         this.isCapitalEsperado = isCapitalEsperado;
-        this.descontoEsperado = descontoEsperado;
-        this.descontoFreteEsperado = descontoFreteEsperado;
-        this.isCartaoEmpresa = isCartaoEmpresa;
-        this.taxaCashbackEsperada = taxaCashbackEsperada;
     }
 
     @Parameters
