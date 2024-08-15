@@ -65,21 +65,4 @@ public class Cliente {
     public void setCashback(double cashback) {
         this.cashback = cashback;
     }
-
-    public double getDisconto(){
-        if(tipo.equals("especial")) return 0.1;
-        return 0.0;
-    }
-
-    public double getDiscontoFrete(){
-        if(tipo.equals("especial")) return 0.3;
-        return 0.0;
-    }
-
-    public double getTaxaCashback(boolean isCartaoEmpresa){
-        if(tipo.equals("prime")){
-            return isCartaoEmpresa ? 0.05 : 0.03;
-        }
-        return 0.0;
-    }
 }

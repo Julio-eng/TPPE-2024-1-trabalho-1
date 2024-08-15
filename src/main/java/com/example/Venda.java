@@ -6,6 +6,7 @@ import java.util.List;
 public class Venda {
     private Date dataVenda;
     private Cliente cliente;
+    private ClienteBeneficios clienteBeneficios;
     private List<Produto> produtos;
     private String formaPagamento;
     private ProcessarCashback processadorCashback;
@@ -13,6 +14,7 @@ public class Venda {
     public Venda(Date dataVenda, Cliente cliente, List<Produto> produtos, String formaPagamento) {
         this.dataVenda = dataVenda;
         this.cliente = cliente;
+        this.clienteBeneficios = new ClienteBeneficios(cliente);
         this.produtos = produtos;
         this.formaPagamento = formaPagamento;
         this.processadorCashback = new ProcessarCashback(cliente);
@@ -78,7 +80,7 @@ public class Venda {
         if (cliente.getTipo().equals("prime")) return 0.0;
     
         double valorFrete = calcularValorFrete(cliente.getEstado(), cliente.isCapital());
-        valorFrete -= (valorFrete * cliente.getDiscontoFrete());
+        valorFrete -= (valorFrete * clienteBeneficios.getDescontoFrete());
     
         return valorFrete;
     }
@@ -125,7 +127,7 @@ public class Venda {
 
     public double calcularCashback(){
         double totalCashback = 0.0;
-        totalCashback = calcularTotalProdutos() * cliente.getTaxaCashback(formaPagamento.equals("cartao loja"));
+        totalCashback = calcularTotalProdutos() * clienteBeneficios.getTaxaCashback(formaPagamento.equals("cartao loja"));
         cliente.setCashback(cliente.getCashback() + totalCashback);
         return totalCashback;
     }
